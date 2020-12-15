@@ -3,7 +3,7 @@ const http = require('http')
 const path = require('path')
 const socketio = require('socket.io')
 const { generateMessage, generateLocationMessage } = require('./utils/messages')
-const Filter = require('bad-words')
+    // const Filter = require('bad-words')
 const { addUser, removeUser, getUser, getUsersInRoom } = require('./utils/users')
 
 const app = express()
@@ -50,10 +50,10 @@ io.on('connection', (socket) => {
     })
 
     socket.on('sendMessage', (message, callback) => {
-        const filter = new Filter()
-        if (filter.isProfane(message)) {
-            return callback('Watch your mouth!')
-        }
+        // const filter = new Filter()
+        // if (filter.isProfane(message)) {
+        //     return callback('Watch your mouth!')
+        // }
         const user = getUser(socket.id)
         io.to(user.room).emit('message', generateMessage(user.username, message))
         callback()
